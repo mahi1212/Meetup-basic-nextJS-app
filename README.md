@@ -2,6 +2,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started With my first nextjs app
 
+### live link : http://meetup-basic-next-js-app.vercel.app/
+
 First, run the development server:
 
 ```bash
