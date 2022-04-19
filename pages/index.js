@@ -32,7 +32,21 @@ const HomePage = (props) => {
     );
 };
 
+// this getServerSideProps is used when our data could be changed withing sometimes
+// it will be best use for that point of view. More preferable depending on req & res
+// export async function getServerSideProps(context){
+//     const req = context.req;
+//     const res = context.res;
+//     // here we can fetch from any API and return an object
+//     return {
+//         props : {
+//             meetups: DUMMY_MEETUPS
+//         }
+//     }
+// }
+
 // This function execute during npm run build command
+// We will use getStaticProps() cause here no req and res will occur
 export async function getStaticProps(){
     // fetch data and return an object here
     return{
