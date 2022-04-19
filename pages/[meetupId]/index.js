@@ -1,5 +1,6 @@
 import { MongoClient, ObjectId } from 'mongodb'
 import MeetupDetail from '../../components/meetups/MeetupDetail'
+import { Head } from 'next/head'
 
 function MeetUpId(props) {
   return (
@@ -22,7 +23,7 @@ export async function getStaticPaths() {
   client.close()
 
   return {
-    fallback: false,
+    fallback: 'blocking',
     paths: meetups.map((meetup) => ({ params: { meetupId: meetup._id.toString() } }))
   }
 }
@@ -32,14 +33,14 @@ export async function getStaticProps(context) {
   const client = await MongoClient.connect('mongodb+srv://meetupAdmin:KgBeVHfXJAfR9yns@cluster0.tecyb.mongodb.net/meetups?retryWrites=true&w=majority')
   const db = client.db()
   const meetupsCollection = db.collection('meetups')
-  const selectedMeetup = await meetupsCollection.findOne({_id: ObjectId(meetupId)})
+  const selectedMeetup = await meetupsCollection.findOne({ _id: ObjectId(meetupId) })
   client.close()
 
   return {
     props: {
       meetupData: {
         id: selectedMeetup._id.toString(),
-        title:selectedMeetup.title,
+        title: selectedMeetup.title,
         address: selectedMeetup.address,
         image: selectedMeetup.image,
         description: selectedMeetup.description
